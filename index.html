@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Calculate what grade you need on your final exam to reach your target course grade. Free, instant, no sign-up required.">
+    <title>What Do I Need on the Final? | Student Grade Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-icon">📚</span>
+                <span>Free Grade Calculator</span>
+            </div>
+            <h1>What Do I Need on the Final?</h1>
+            <p class="hero-subtitle">Enter your course breakdown and current grades. Instantly see the score you need.
+            </p>
+            <button id="cta-button" class="cta-button">
+                <span>Calculate Now</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+            </button>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Free Forever</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-number">⚡</span>
+                <span class="stat-label">Instant Results</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-number">🔒</span>
+                <span class="stat-label">No Login Required</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <main id="calculator-section" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Grade Calculator</h2>
+                <p>Add your course components, enter your grades, and set your target.</p>
+            </div>
+
+            <div class="calculator-grid">
+                <!-- Left Column: Inputs -->
+                <div class="calculator-inputs">
+                    <!-- Course Components Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">📊</span>
+                                <h3>Course Breakdown</h3>
+                            </div>
+                            <div class="weight-indicator">
+                                <span id="total-weight">0</span>% allocated
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="components-container">
+                                <!-- Component rows will be added here -->
+                            </div>
+                            <button id="add-component" class="add-button">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round">
+                                    <path d="M12 5v14M5 12h14" />
+                                </svg>
+                                Add Component
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Final Exam Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">📝</span>
+                                <h3>Final Exam</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="final-exam-input">
+                                <label for="final-weight">Final Exam Weight</label>
+                                <div class="input-with-suffix">
+                                    <input type="number" id="final-weight" min="0" max="100" placeholder="e.g., 40"
+                                        required>
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Target Grade Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">🎯</span>
+                                <h3>Target Grade</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="target-buttons">
+                                <button class="target-btn" data-target="50">
+                                    <span class="target-label">Pass</span>
+                                    <span class="target-value">50%</span>
+                                </button>
+                                <button class="target-btn" data-target="70">
+                                    <span class="target-label">B Grade</span>
+                                    <span class="target-value">70%</span>
+                                </button>
+                                <button class="target-btn" data-target="85">
+                                    <span class="target-label">A Grade</span>
+                                    <span class="target-value">85%</span>
+                                </button>
+                                <button class="target-btn custom-target-btn" data-target="custom">
+                                    <span class="target-label">Custom</span>
+                                    <div class="custom-input-wrapper">
+                                        <input type="number" id="custom-target" min="0" max="100" placeholder="?">
+                                        <span>%</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scenario Analysis Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">🔄</span>
+                                <h3>Scenario Analysis</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="scenario-description">For components without scores, assume I get:</p>
+
+                            <div class="scenario-slider-container">
+                                <div class="slider-header">
+                                    <span class="slider-value" id="scenario-value-display">0%</span>
+                                </div>
+                                <input type="range" id="scenario-slider" min="0" max="100" value="0"
+                                    class="modern-slider">
+                                <div class="slider-labels">
+                                    <span>0%</span>
+                                    <span>50%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+
+                            <div class="scenario-quick-actions">
+                                <button class="quick-action-btn active" data-value="0">0%</button>
+                                <button class="quick-action-btn" data-value="70">70%</button>
+                                <button class="quick-action-btn" data-value="85">85%</button>
+                                <button class="quick-action-btn" data-value="100">100%</button>
+                            </div>
+
+                            <p class="scenario-note">This applies to any component where the "Score" field is left
+                                blank.</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button id="calculate-btn" class="calculate-button">
+                            <span>Calculate Required Grade</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <button id="reset-btn" class="reset-button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                <path d="M3 3v5h5" />
+                            </svg>
+                            Reset All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Results -->
+                <div class="calculator-results">
+                    <div class="results-card" id="results-card">
+                        <div class="results-placeholder" id="results-placeholder">
+                            <div class="placeholder-icon">🎓</div>
+                            <h3>Your Results Will Appear Here</h3>
+                            <p>Add your grades and click "Calculate" to see what you need on the final.</p>
+                        </div>
+                        <div class="results-content" id="results-content" style="display: none;">
+                            <div class="results-header">
+                                <span class="results-label">You need to score</span>
+                            </div>
+                            <div class="results-score" id="results-score">
+                                <span class="score-number" id="score-number">0</span>
+                                <span class="score-percent">%</span>
+                            </div>
+                            <div class="results-message" id="results-message">
+                                on your final exam
+                            </div>
+                            <div class="results-status" id="results-status">
+                                <span class="status-indicator"></span>
+                                <span class="status-text"></span>
+                            </div>
+                            <div class="results-breakdown" id="results-breakdown">
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Current Weighted Score</span>
+                                    <span class="breakdown-value" id="current-weighted">0%</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Target Grade</span>
+                                    <span class="breakdown-value" id="target-display">0%</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Final Exam Weight</span>
+                                    <span class="breakdown-value" id="final-weight-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error Messages -->
+                    <div class="error-card" id="error-card" style="display: none;">
+                        <div class="error-icon">⚠️</div>
+                        <div class="error-message" id="error-message"></div>
+                    </div>
+
+                    <!-- Tips Card -->
+                    <div class="tips-card">
+                        <h4>💡 Pro Tips</h4>
+                        <ul>
+                            <li>Leave score empty for incomplete assignments</li>
+                            <li>Total weights must equal exactly 100%</li>
+                            <li>Use the slider to see how different scenarios affect your required score</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Built with ❤️ for stressed students everywhere</p>
+            <p class="footer-note">No data stored. All calculations happen in your browser.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
